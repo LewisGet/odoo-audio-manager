@@ -1,6 +1,7 @@
 from odoo import http
 from odoo.http import request
 from odoo.http import Response
+from datetime import datetime, date
 import json
 
 
@@ -30,6 +31,9 @@ class Regedit(http.Controller):
             if field_object.type == "many2one":
                 data[field_index] = field_value.id if field_value else None
 
+            if isinstance(field_value, (datetime, date)):
+                data[field_index] = field_value.isoformat()
+
         return Response(json.dumps({"respond": data}), status=200)
 
 
@@ -55,6 +59,9 @@ class Regedit(http.Controller):
 
                 if fields[field].type == "many2many":
                     value = [int(i) for i in get[field].split(",")]
+
+                if isinstance(fields[field], (datetime, date)):
+                    value = datetime.fromisoformat(get[field])
 
                 obj.write({field: value})
                 updates.append(field)
