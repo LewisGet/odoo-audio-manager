@@ -5,9 +5,13 @@
         <field name="arch" type="xml">
             <tree editable="top">
                 <field name="path"/>
+                <field name="length"/>
                 <field name="rates"/>
                 <field name="channels"/>
                 <field name="tag_ids" widget="many2many_tags"/>
+                <field name="pad_p"/>
+                <field name="pad_a"/>
+                <field name="pad_d"/>
             </tree>
         </field>
     </record>
@@ -21,9 +25,13 @@
                 <sheet>
                     <group>
                         <field name="path"/>
+                        <field name="length"/>
                         <field name="rates"/>
                         <field name="channels"/>
                         <field name="tag_ids" string="tags"/>
+                        <field name="pad_p"/>
+                        <field name="pad_a"/>
+                        <field name="pad_d"/>
                     </group>
                 </sheet>
             </form>
