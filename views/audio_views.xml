@@ -19,10 +19,12 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <field name="path"/>
-                    <field name="rates"/>
-                    <field name="channels"/>
-                    <field name="tag_ids"/>
+                    <group>
+                        <field name="path"/>
+                        <field name="rates"/>
+                        <field name="channels"/>
+                        <field name="tag_ids" string="tags"/>
+                    </group>
                 </sheet>
             </form>
         </field>
@@ -46,9 +48,11 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <field name="name"/>
-                    <field name="description"/>
-                    <field name="audio_ids"/>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="audio_ids" string="audios"/>
+                    </group>
                 </sheet>
             </form>
         </field>
