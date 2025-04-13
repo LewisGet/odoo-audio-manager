@@ -48,7 +48,15 @@ class Regedit(http.Controller):
 
         for field in fields:
             try:
-                obj.write({field: get[field]})
+                value = get[field]
+
+                if fields[field].type == "many2one":
+                    value = int(get[field])
+
+                if fields[field].type == "many2many":
+                    value = [int(i) for i in get[field].split(",")]
+
+                obj.write({field: value})
                 updates.append(field)
             except:
                 passing.append(field)
