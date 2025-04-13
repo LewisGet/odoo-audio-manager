@@ -1,0 +1,76 @@
+<odoo>
+    <record id="view_audio_file_tree" model="ir.ui.view">
+        <field name="name">audio.file.tree</field>
+        <field name="model">audio.file</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="path"/>
+                <field name="rates"/>
+                <field name="channels"/>
+                <field name="tag_ids"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_audio_file_form" model="ir.ui.view">
+        <field name="name">audio.file.form</field>
+        <field name="model">audio.file</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="path"/>
+                    <field name="rates"/>
+                    <field name="channels"/>
+                    <field name="tag_ids"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_audio_tag_tree" model="ir.ui.view">
+        <field name="name">audio.tag.tree</field>
+        <field name="model">audio.tag</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="audio_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_audio_tag_form" model="ir.ui.view">
+        <field name="name">audio.tag.form</field>
+        <field name="model">audio.tag</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="audio_ids"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_audio_file_list" model="ir.actions.act_window">
+        <field name="name">Audio Files</field>
+        <field name="res_model">audio.file</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_audio_file_tree"/>
+    </record>
+
+
+    <record id="action_audio_tag_list" model="ir.actions.act_window">
+        <field name="name">Audio Tags</field>
+        <field name="res_model">audio.tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_audio_tag_tree"/>
+    </record>
+
+    <menuitem id="menu_audio_manager_root" name="Audio Manager" groups="base.group_user"/>
+    <menuitem id="menu_audio_file_tree" name="Audio Files" parent="menu_audio_manager_root" action="action_audio_file_list" groups="base.group_user"/>
+    <menuitem id="menu_audio_tag_tree" name="Audio tags" parent="menu_audio_manager_root" action="action_audio_tag_list" groups="base.group_user"/>
+</odoo>
