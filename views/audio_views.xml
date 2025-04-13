@@ -3,11 +3,11 @@
         <field name="name">audio.file.tree</field>
         <field name="model">audio.file</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree editable="top">
                 <field name="path"/>
                 <field name="rates"/>
                 <field name="channels"/>
-                <field name="tag_ids"/>
+                <field name="tag_ids" widget="many2many_tags"/>
             </tree>
         </field>
     </record>
@@ -34,10 +34,10 @@
         <field name="name">audio.tag.tree</field>
         <field name="model">audio.tag</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree editable="top">
                 <field name="name"/>
                 <field name="description"/>
-                <field name="audio_ids"/>
+                <field name="audio_ids" widget="many2many_tags"/>
             </tree>
         </field>
     </record>
