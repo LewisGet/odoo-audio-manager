@@ -3,6 +3,9 @@ from odoo.http import request
 from odoo.http import Response
 from datetime import datetime, date
 import json
+import glob
+
+from pydub import AudioSegment
 
 
 class Regedit(http.Controller):
@@ -72,3 +75,31 @@ class Regedit(http.Controller):
             "updates": updates,
             "passing": passing
         }), status=200)
+
+
+    @http.route('/audio_file/batch', type='http', auth='public', methods=['GET'])
+    def batch_init_audio_file(self, **get):
+        request.session.authenticate(get['db'], login=get['username'], password=get['password'])
+
+        create_audio_files = []
+
+        for path in glob.glob(get['path']):
+            audio = AudioSegment.from_file(path)
+
+            create_audio_files.append({
+                "path" : path,
+                "tag_ids" : [int(i) for i in get['tag_ids'].split(",")],
+                "rates" : audio.frame_rate,
+                "channels" : audio.channels,
+                "length" : len(audio.get_array_of_samples())
+            })
+
+        try:
+            request.env["audio.file"].sudo().create(create_audio_files)
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=500
+            )
+
+        return Response({"message": "done"}, status=200)

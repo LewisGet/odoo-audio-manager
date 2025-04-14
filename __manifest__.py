@@ -3,6 +3,9 @@
     "version": "1.0",
     "author": "Lewis Jang",
     "depends": ["base"],
+    "external_dependencies": {
+        "python": ['pydub']
+    },
     "data": [
         "security/ir.model.access.csv",
         "security/security.xml",
