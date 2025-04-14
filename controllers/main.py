@@ -8,7 +8,7 @@ import json
 class Regedit(http.Controller):
 
     @http.route('/api/<string:model_name>/get/<int:object_id>', type='http', auth='public', methods=['GET'])
-    def audio_file_get(self, model_name, object_id, **get):
+    def model_get(self, model_name, object_id, **get):
         request.session.authenticate(get['db'], login=get['username'], password=get['password'])
 
         obj = request.env[model_name].sudo().browse(object_id)
@@ -38,7 +38,7 @@ class Regedit(http.Controller):
 
 
     @http.route('/api/<string:model_name>/set/<int:object_id>', type='http', auth='public', methods=['GET'])
-    def audio_set_get(self, model_name, object_id, **get):
+    def model_set(self, model_name, object_id, **get):
         request.session.authenticate(get['db'], login=get['username'], password=get['password'])
 
         obj = request.env[model_name].sudo().browse(object_id)
